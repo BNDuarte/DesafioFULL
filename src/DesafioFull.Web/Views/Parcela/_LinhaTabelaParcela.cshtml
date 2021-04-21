@@ -1,0 +1,27 @@
+﻿@model DesafioFull.Web.Models.Parcelas.ParcelaCreateEditViewModel
+@using HtmlHelpers.BeginCollectionItemCore
+
+
+<tr class="bg-white">
+    @using (Html.BeginCollectionItem("Parcelas"))
+    {
+        <td>
+            <input aria-desabilitado-para-edicao asp-for="@Model.Id" type="hidden" />
+        </td>
+
+        <td>
+            <input asp-for="@Model.NumeroParcela" style="background-color: #fff; border-color: #fff;" class="form-control" readonly="readonly" />
+        </td>
+        <td>
+            <input asp-for="@Model.DataVencimento" style="background-color: #fff; border-color: #fff;" class="form-control" readonly="readonly" />
+        </td>
+        <td>
+            <input asp-for="@Model.ValorParcela" style="background-color: #fff; border-color: #fff;" class="form-control" readonly="readonly" />
+        </td>
+        <td>
+            <button aria-desabilitado-para-edicao type="button" class="btn btn-outline btn-secondary btn-remover-item" onclick="removerParcela(this)" title="Excluir">
+                <i class="far fa-trash-alt"></i>
+            </button>
+        </td>
+    }
+</tr>

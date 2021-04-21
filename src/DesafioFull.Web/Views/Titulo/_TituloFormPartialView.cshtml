@@ -1,0 +1,103 @@
+﻿@model DesafioFull.Web.Models.Titulos.TituloCreateEditViewModel
+@using DesafioFull.Web.Models.Parcelas
+
+<form method="post" id="formTitulo">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Titulo" class="control-label"></label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NomeDevedor" class="control-label"></label>
+        <input asp-for="NomeDevedor" class="form-control" />
+        <span asp-validation-for="NomeDevedor" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CPF" class="control-label"></label>
+        <input asp-for="CPF" id="cpf" class="form-control" />
+        <span asp-validation-for="CPF" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PorcentagemJuros" class="control-label"></label>
+        <input asp-for="PorcentagemJuros" onkeypress='validateOnlyNumberInteger(event)' class="form-control formataNumero" />
+        <span asp-validation-for="PorcentagemJuros" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PorcentagemMulta" class="control-label"></label>
+        <input asp-for="PorcentagemMulta" onkeypress='validateOnlyNumberInteger(event)' class="form-control formataNumero" />
+        <span asp-validation-for="PorcentagemMulta" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <span asp-validation-for="Parcelas" class="text-danger"></span>
+        <div class="row">
+            <h4 class="control-label col-6">Serviços</h4>
+            <div class="form-group col-6 text-right">
+                <button aria-desabilitado-para-edicao id="btnIncluirParcela" type="button" class="btn btn-outline btn-secondary" title="Incluir">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table border" id="tabelaParcela">
+                <thead class="thead-light">
+                    <tr>
+                        <th></th>
+                        <th>Número da parcela</th>
+                        <th>Data de vencimento</th>
+                        <th>Valor da parcela</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tBodyParcelas">
+                    @foreach (var parcela in Model.Parcelas ?? Enumerable.Empty<ParcelaCreateEditViewModel>())
+                    {
+                        @await Html.PartialAsync("/Views/Parcela/_LinhaTabelaParcela.cshtml", parcela);
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" form="formTitulo" class="btn btn-primary" />
+    </div>
+</form>
+
+@await Html.PartialAsync("/Views/Parcela/_ModalParcelaFormView.cshtml", new ParcelaCreateEditViewModel())
+<script src="~/js/parcela.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#cpf').mask('000.000.000-00', { reverse: true });
+
+        $('.formataNumero').mask('#.##0,00', { reverse: true });
+
+        function validateOnlyNumberInteger(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+    });
+</script>

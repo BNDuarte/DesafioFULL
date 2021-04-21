@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DesafioFull.Web.Models.Titulos.TituloDetailsViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Títulos</h1>
+
+<p>
+    <a asp-action="Create" asp-controller="Titulo">Novo título</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroTitulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeDevedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantidadeParcelas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorTitulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiasAtraso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorTituloAtualizado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroTitulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeDevedor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantidadeParcelas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorTitulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiasAtraso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorTituloAtualizado)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", "Titulo", new { id = item.Id }) |
+                    @Html.ActionLink("Detalhes", "Details", "Titulo", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

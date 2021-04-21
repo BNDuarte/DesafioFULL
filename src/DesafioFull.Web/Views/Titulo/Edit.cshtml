@@ -1,0 +1,22 @@
+﻿@model DesafioFull.Web.Models.Titulos.TituloCreateEditViewModel
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+
+<h4>Editar título</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @{ await Html.RenderPartialAsync("_TituloFormPartialView", Model);}
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

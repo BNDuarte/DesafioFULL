@@ -1,0 +1,46 @@
+﻿@model DesafioFull.Web.Models.Parcelas.ParcelaCreateEditViewModel
+
+<div class="modal fade" id="modalParcela" tabindex="-1" aria-labelledby="parcela" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-danger" id="exampleModalLabel">
+                    Adicionar parcela
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="formParcela" asp-controller="Parcela" asp-action="AdicionarParcela">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="form-group">
+                        <label asp-for="NumeroParcela" class="control-label"></label>
+                        <input asp-for="NumeroParcela" class="form-control" />
+                        <span asp-validation-for="NumeroParcela" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="DataVencimento" class="control-label"></label>
+                        <input asp-for="DataVencimento" id="dataVencimento" type="date" class="form-control data" />
+                        <span asp-validation-for="DataVencimento" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ValorParcela" class="control-label"></label>
+                        <input asp-for="ValorParcela" onkeypress='validateOnlyNumberInteger(event)' id="cpf" class="form-control formataNumero" />
+                        <span asp-validation-for="ValorParcela" class="text-danger"></span>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button aria-desabilitado-para-edicao type="submit" form="formParcela" id="btn-submit-servico" class="btn btn-primary">OK</button>
+                <button aria-desabilitado-para-edicao type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
